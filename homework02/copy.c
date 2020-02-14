@@ -28,6 +28,7 @@ int main (int argc, char *argv[]){
 
     //TO-DO:
     //check if file exists
+    //use access function if it equals 0, then it means that file dest already exists
 
     else{
         printf("The source path was: %s\n", argv[1]);
