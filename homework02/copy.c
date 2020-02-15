@@ -6,16 +6,18 @@
 
 */ 
 
-
-
-
-
-
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
+
 
 int main (int argc, char *argv[]){
-//argc takes in the numner of arguments passed && argv[] is a pointer array for each argument 
+    //argc takes in the numner of arguments passed && argv[] is a pointer array for each argument 
+
+    const char *srcPath;
+    const char *srcDest;
+
+
 
     if(argc < 2){
         perror("Missing parameter. Try: copy <srcpath> <destinationpath>");
