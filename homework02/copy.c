@@ -36,7 +36,7 @@ int doesFileExist(const char *file){
 /* * checkArgs
 * * @argc: int, takes in number of args
 * * @argv  pointer array, store each argument
-* *
+* * return -1 if error, 0 if all args are valid
 * */ 
 
 int checkArgs(int argc, char *argv[]){
@@ -53,6 +53,7 @@ int checkArgs(int argc, char *argv[]){
     else {
         printf("The source path was: %s\n", argv[1]);
         printf("The destination path was: %s\n", argv[2]);
+        return 0;
 
     }
 }
