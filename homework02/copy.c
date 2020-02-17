@@ -52,6 +52,12 @@ int checkArgs(int argc, char *argv[]){
 *  
 */
 
+
+int main(const char *srcFile){
+
+    //TO-DO: everything
+}
+
 int main (int argc, char *argv[]){  
 
     const char *srcPath;
