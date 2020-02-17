@@ -47,15 +47,17 @@ int checkArgs(int argc, char *argv[]){
 }
 
 /* doesSrcFileExist
-*  @param: 
-*  @returns: 
-*  
+*  @param: srcFile, pointer to sourcefile
+*  @returns: 0 if file exists, -1 if file doesn't exist
 */
 
-
-int main(const char *srcFile){
-
-    //TO-DO: everything
+int doesSrcFileExist(const char *srcFile){
+    if(access(srcFile, F_OK)!= -1){
+        return 0;
+    }
+    else{
+        return -1;
+    }
 }
 
 int main (int argc, char *argv[]){  
