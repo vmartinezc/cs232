@@ -16,7 +16,7 @@
 *  return 0 if file exists
 *  -1 is it does not exist
 */ 
-int doesFileExist(const char *file){
+int doesDestFileExist(const char *file){
     if (access(file,F_OK)==0){ 
         return 0;
     }
@@ -45,6 +45,12 @@ int checkArgs(int argc, char *argv[]){
         return 0;
     }
 }
+
+/* doesSrcFileExist
+*  @param: 
+*  @returns: 
+*  
+*/
 
 int main (int argc, char *argv[]){  
 
