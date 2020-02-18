@@ -11,6 +11,21 @@
 #include <unistd.h>
 
 
+
+/* doesSrcFileExist
+*  @param: srcFile, pointer to sourcefile
+*  @returns: 0 if file exists, -1 if file doesn't exist
+*/
+
+int doesSrcFileExist(const char *srcFile){
+    if(access(srcFile, F_OK)!= -1){
+        return 1;
+    }
+    else{
+        return 0;
+    }
+}
+
 /*  doesFileExist
 *   @param: filename
 *  return 0 if file exists
@@ -22,6 +37,7 @@ int doesDestFileExist(const char *file){
     }
     else{
         return -1;
+        
     }
 }
 
@@ -39,6 +55,14 @@ int checkArgs(int argc, char *argv[]){
         perror("Please provide destination path.");
         exit(-1);
     }
+    else if(!doesSrcFileExist(argv[1])){
+        perror(argv[1]);
+        exit(-1);
+    }
+
+    else if(doesDestFileExist(argv[2])){
+        printf("dest already exists");
+    }
     else {
         printf("The source path was: %s\n", argv[1]);
         printf("The destination path was: %s\n", argv[2]);
@@ -46,19 +70,7 @@ int checkArgs(int argc, char *argv[]){
     }
 }
 
-/* doesSrcFileExist
-*  @param: srcFile, pointer to sourcefile
-*  @returns: 0 if file exists, -1 if file doesn't exist
-*/
 
-int doesSrcFileExist(const char *srcFile){
-    if(access(srcFile, F_OK)!= -1){
-        return 0;
-    }
-    else{
-        return -1;
-    }
-}
 
 int main (int argc, char *argv[]){  
 
