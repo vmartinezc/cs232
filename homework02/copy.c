@@ -63,6 +63,7 @@ int doesSrcFileExist(const char *srcFile){
 int main (int argc, char *argv[]){  
 
    checkArgs(argc, argv);
+
    FILE *srcPath, *destPath; //Declares pointer for file typedef variables
 
    //opens file for reading
@@ -72,7 +73,8 @@ int main (int argc, char *argv[]){
    destPath = fopen(argv[2], "w");
 
    // Takes single character of file at a time
-   char f = fgetc(srcPath);
+   char f;
+   f = fgetc(srcPath);
 
    while (f != EOF){
        fputc(f, destPath);
