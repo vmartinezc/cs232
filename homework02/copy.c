@@ -61,9 +61,12 @@ int checkArgs(int argc, char *argv[]){
         exit(-1);
     }
 
-    else if(doesDestFileExist(argv[2])){
-        printf("dest already exists");
+    else if(!doesDestFileExist(argv[2])){
+        perror("Destination already exists");
+        printf("Destination already exists");
+        exit(-1);
     }
+
     else {
         printf("The source path was: %s\n", argv[1]);
         printf("The destination path was: %s\n", argv[2]);
