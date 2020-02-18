@@ -2,6 +2,7 @@
  
 * *  Writing a Program in C
 * *  @author: Valeria Martinez (vam6)
+* * Citations: https://www.tutorialspoint.com/c_standard_library/c_function_fopen.htm, https://www.geeksforgeeks.org/data-type-file-c/, https://www.geeksforgeeks.org/fgetc-fputc-c/
 * *  @date: 02-13-2020 
 
 */ 
