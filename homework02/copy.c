@@ -32,11 +32,11 @@ int doesDestFileExist(const char *file){
 */
 int checkArgs(int argc, char *argv[]){
     if (argc<2){
-        perror("Missing parameter. \nTry: copy <srcpath><destination path>");
+        perror("Missing parameter. \nTry: copy <srcpath> <destination path>");
         exit(-1);
     }
     else if (argv[2] == NULL){
-        perror("Please provide source path and destination path.");
+        perror("Please provide destination path.");
         exit(-1);
     }
     else {
@@ -62,8 +62,32 @@ int doesSrcFileExist(const char *srcFile){
 
 int main (int argc, char *argv[]){  
 
-    const char *srcPath;
-    const char *srcDest;
+   checkArgs(argc, argv);
+   FILE *srcPath, *destPath; //Declares pointer for typedef variables
+
+   //opens file for reading
+   srcPath = fopen(argv[1], "r"); 
+
+   //creates an empty file for writing
+   destPath = fopen(argv[2], "w");
+
+   char f = fgetc(srcPath);
+
+   while (f != EOF){
+       fputc(f, destPath);
+       f = fgetc(srcPath);
+   }
+
+   fclose(srcPath);
+   fclose(destPath);
+   printf("Finished copying files");
+   return 0;
+
+}
+
+
+
+
 
 
 
