@@ -63,7 +63,6 @@ int checkArgs(int argc, char *argv[]){
 
     else if(!doesDestFileExist(argv[2])){
         perror("Destination already exists");
-        printf("Destination already exists");
         exit(-1);
     }
 
