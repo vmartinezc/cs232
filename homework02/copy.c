@@ -2,6 +2,7 @@
  
 * *  Writing a Program in C
 * *  @author: Valeria Martinez (vam6)
+* * Citations: https://www.tutorialspoint.com/c_standard_library/c_function_fopen.htm, https://www.geeksforgeeks.org/data-type-file-c/, https://www.geeksforgeeks.org/fgetc-fputc-c/
 * *  @date: 02-13-2020 
 
 */ 
@@ -10,6 +11,21 @@
 #include <stdlib.h>
 #include <unistd.h>
 
+
+
+/* doesSrcFileExist
+*  @param: srcFile, pointer to sourcefile
+*  @returns: 0 if file exists, -1 if file doesn't exist
+*/
+
+int doesSrcFileExist(const char *srcFile){
+    if(access(srcFile, F_OK)!= -1){
+        return 1;
+    }
+    else{
+        return 0;
+    }
+}
 
 /*  doesFileExist
 *   @param: filename
@@ -22,6 +38,7 @@ int doesDestFileExist(const char *file){
     }
     else{
         return -1;
+        
     }
 }
 
@@ -39,6 +56,16 @@ int checkArgs(int argc, char *argv[]){
         perror("Please provide destination path.");
         exit(-1);
     }
+    else if(!doesSrcFileExist(argv[1])){
+        perror(argv[1]);
+        exit(-1);
+    }
+
+    else if(!doesDestFileExist(argv[2])){
+        perror("Destination already exists");
+        exit(-1);
+    }
+
     else {
         printf("The source path was: %s\n", argv[1]);
         printf("The destination path was: %s\n", argv[2]);
@@ -46,23 +73,12 @@ int checkArgs(int argc, char *argv[]){
     }
 }
 
-/* doesSrcFileExist
-*  @param: srcFile, pointer to sourcefile
-*  @returns: 0 if file exists, -1 if file doesn't exist
-*/
 
-int doesSrcFileExist(const char *srcFile){
-    if(access(srcFile, F_OK)!= -1){
-        return 0;
-    }
-    else{
-        return -1;
-    }
-}
 
 int main (int argc, char *argv[]){  
 
    checkArgs(argc, argv);
+
    FILE *srcPath, *destPath; //Declares pointer for file typedef variables
 
    //opens file for reading
@@ -72,7 +88,8 @@ int main (int argc, char *argv[]){
    destPath = fopen(argv[2], "w");
 
    // Takes single character of file at a time
-   char f = fgetc(srcPath);
+   char f;
+   f = fgetc(srcPath);
 
    while (f != EOF){
        fputc(f, destPath);
