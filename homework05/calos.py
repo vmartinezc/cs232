@@ -53,7 +53,17 @@ class CalOS:
         '''Do a context switch between the current_proc and the process
         on the front of the ready_q.
         '''
-        pass
+        self._cpu.get_registers = current_proc
+        if(self._ready_q.len()==0):
+             self._registers = {
+            'reg0' : 0,
+            'reg1' : 0,
+            'reg2' : 0,
+            'pc': 0
+            }
+        context_switch(self)
+        self._timer.reset_timer()
+
 
     def run(self):
         '''Startup the timer controller and execute processes in the ready

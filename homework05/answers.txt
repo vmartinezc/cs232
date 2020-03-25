@@ -1,2 +1,9 @@
-1. The PCB class is defined in 
-2. The PCB contains
+1. The PCB class is defined in calos.py
+2. The PCB contains name, legal state, next PID, entry point, memory low, memory high, register0, register 1, register 2, pc, quantum (how long the process runs before being interrupted)
+    setting entry point, get entry point, setting memory limits, function for setting the state, function for getting the state,
+    function for setting registers, function for getting registers, function for getting quantums, function for getting PID, function for getting name.
+3. A PCB is created when the PCB object is called by the load_program. Line 179 in main.py
+4. The states defined have been: NEW, READY, RUNNING, WAITING, DONE
+5. It has been defined in calos.py inside the CalOs class. Its significance is that it referes to the current process's PCB.
+6. It is setting the number of cycles until the timer fires.
+7. Once the timer has expired, don't generate another interrupt until the previous one is handled and the interrupt is reset.
