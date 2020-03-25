@@ -49,7 +49,12 @@ class CalOS:
         '''
         self._cpu.get_registers = current_proc
          if(self._ready_q.len()==0):
-             self.timer.reset_timer()
+             self._timer.reset_timer()
+             self._cpu.reg0 = 0
+             self._cpu.reg1 = 0
+             self.cpu.reg2 = 0
+             self._cpu.pc = 0
+             
         pass
 
     def context_switch(self):
