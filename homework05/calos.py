@@ -44,15 +44,6 @@ class CalOS:
             print("Num ready processes = {}".format(len(self._ready_q)))
 
     def timer_isr(self):
-        '''Called when the timer expires. If there is no process in the
-        ready queue, reset the timer and continue.  Else, context_switch.
-        '''
-        pass
-
-    def context_switch(self):
-        '''Do a context switch between the current_proc and the process
-        on the front of the ready_q.
-        '''
         self._cpu.get_registers = current_proc
         if(self._ready_q.len()==0):
              self._registers = {
@@ -63,6 +54,13 @@ class CalOS:
             }
         context_switch(self)
         self._timer.reset_timer()
+        
+
+    def context_switch(self):
+        '''Do a context switch between the current_proc and the process
+        on the front of the ready_q.
+        '''
+       
 
 
     def run(self):
