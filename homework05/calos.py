@@ -44,30 +44,37 @@ class CalOS:
             print("Num ready processes = {}".format(len(self._ready_q)))
 
     def timer_isr(self):
-        self._cpu.get_registers = current_proc
-        if(self._ready_q.len()==0):
-             self._registers = {
-            'reg0' : 0,
-            'reg1' : 0,
-            'reg2' : 0,
-            'pc': 0
-            }
-        context_switch(self)
-        self._timer.reset_timer()
+        CalOS.current_proc.set_registers(self._cpu.get_registers())  
+        if len(self._ready_q) == 0 :
+            self.reset_timer()
+            self._registers = {
+                'reg0' : 0,
+                'reg1' : 0,
+                'reg2' : 0,
+                'pc': 0
+                }
+            return
+        self.context_switch()
+        self.reset_timer()
         
 
-    def context_switch(self):
-        '''Do a context switch between the current_proc and the process
-        on the front of the ready_q.
-        '''
-       
-
+    def context_switch(self): 
+        print("-    CONTEXT SWITCH    -")
+        new_process = self._ready_q.pop(0)
+        CalOS.current_proc.set_registers(self._cpu.get_registers())
+        self._cpu.set_registers(new_process.get_registers())
+        self.add_to_ready_q(CalOS.current_proc)
+        new_process.set_state(PCB.RUNNING)
+        CalOS.current_proc = new_process
 
     def run(self):
-        '''Startup the timer controller and execute processes in the ready
-        queue on the given cpu -- i.e., run the operating system!
-        '''
-        pass
+        while len(self._ready_q) > 0:
+            CalOS.current_proc = self._ready_q.pop(0)
+            self.reset_timer()
+            self._cpu.set_registers(CalOS.current_proc.get_registers())
+            self._cpu.run_process()
+            CalOS.current_proc.set_state(PCB.DONE)
+       
 
     def reset_timer(self):
         '''Reset the timer's countdown to the value in the current_proc's
