@@ -1,4 +1,13 @@
 
+# CalOs 
+# Created by: Victor Norman
+# Modified by: Valeria Martinez (vam6)
+# Homework 05: Adding Context Switch
+# CS 232: Operating Systems @ Calvin University
+# Part Ni
+# 30 March 2020
+
+
 DEFAULT_QUANTUM = 3   # very short -- for pedagogical reasons.
 
 class CalOS:
@@ -43,7 +52,12 @@ class CalOS:
                 print("\t" + str(p))
             print("Num ready processes = {}".format(len(self._ready_q)))
 
+
+
     def timer_isr(self):
+        '''Called when the timer expires. If there is no process in the
+        ready queue, reset the timer and continue.  Else, context_switch.
+        '''
         CalOS.current_proc.set_registers(self._cpu.get_registers())  
         if len(self._ready_q) == 0 :
             self.reset_timer()
@@ -59,7 +73,11 @@ class CalOS:
         
 
     def context_switch(self): 
-        print("-    CONTEXT SWITCH    -")
+        '''Do a context switch between the current_proc and the process
+        on the front of the ready_q.
+        '''
+        
+        print("    CONTEXT SWITCH    ")
         new_process = self._ready_q.pop(0)
         CalOS.current_proc.set_registers(self._cpu.get_registers())
         self._cpu.set_registers(new_process.get_registers())
@@ -67,7 +85,11 @@ class CalOS:
         new_process.set_state(PCB.RUNNING)
         CalOS.current_proc = new_process
 
+
     def run(self):
+        '''Startup the timer controller and execute processes in the ready
+        queue on the given cpu -- i.e., run the operating system!
+        '''
         while len(self._ready_q) > 0:
             CalOS.current_proc = self._ready_q.pop(0)
             self.reset_timer()

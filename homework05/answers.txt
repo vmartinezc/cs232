@@ -1,3 +1,11 @@
+
+# CalOs 
+# Valeria Martinez (vam6)
+# Homework 05: Adding Context Switch
+# CS 232: Operating Systems @ Calvin University
+# Part Ein
+# 30 March 2020
+
 1. The PCB class is defined in calos.py
 2. The PCB contains name, legal state, next PID, entry point, memory low, memory high, register0, register 1, register 2, pc, quantum (how long the process runs before being interrupted)
     setting entry point, get entry point, setting memory limits, function for setting the state, function for getting the state,
