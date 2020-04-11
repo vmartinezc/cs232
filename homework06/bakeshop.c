@@ -19,7 +19,6 @@
 
 
 
-
 /*
     SPECS
 
@@ -35,8 +34,6 @@
  */
 
 
-int customersAllowed = 5;
-int totalCustomers = 10;
 
 //threads
 pthread_t bakerBakingThread;
@@ -48,9 +45,48 @@ sem_t semBaker;
 sem_t semCustomers;
 sem_t semStoreCapacity;
 
+//global vars
+int customersAllowed = 5;
+int totalCustomers = 10;
+int loavesAvailable = 0;
+int checkoutLine[10];
+int loavesBaked = 0;
+int checkedOut = 0;
+int inStore = 0;
+
 
 void* bakingBread(){
+
+    struct timespec timer;
     //to-do
+    while (loavesBaked < 10){
+        timer.tv_sec = 1;
+        fprintf(stderr, "*** Baker: Here I am baking a loaf of bread *****\n");
+        
+        sem_wait(&semBaker);
+        loavesBaked++;
+        loavesAvailable++;
+        fprintf(stderr, "\n *** Baked loaves: %d\n Available loaves: %d\n", loavesBaked, loavesAvailable);
+
+        sem_post(&semBaker);
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    }
 }
 
 void* buying(){
