@@ -57,10 +57,10 @@ int inStore = 0;
 
 void* bakingBread(){
 
-    struct timespec timer;
+    struct timespec tim;
     //to-do
     while (loavesBaked < 10){
-        timer.tv_sec = 1;
+        tim.tv_sec = 1;
         fprintf(stderr, "*** Baker: Here I am baking a loaf of bread *****\n");
         
         sem_wait(&semBaker);
@@ -69,24 +69,10 @@ void* bakingBread(){
         fprintf(stderr, "\n *** Baked loaves: %d\n Available loaves: %d\n", loavesBaked, loavesAvailable);
 
         sem_post(&semBaker);
-        
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        nanosleep(&tim);
     }
+
+    fprintf(stderr, "Ten loaves baked!\n");
 }
 
 void* buying(){
