@@ -1,8 +1,8 @@
 # cs232
-Operating Systems
+Operating Systems @ Calvin University
 
 Spring 2020
 
 Prof Victor Norman
 
-Calvin University
+
