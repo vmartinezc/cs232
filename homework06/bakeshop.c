@@ -55,7 +55,7 @@ int checkedOut = 0;
 int inStore = 0;
 
 
-void* bakingBread(){
+void *bakingBread(){
 
     struct timespec tim;
     //to-do
@@ -76,7 +76,7 @@ void* bakingBread(){
     fprintf(stderr, "Ten loaves baked!\n");
 }
 
-void* buying(){
+void *buying(){
     while (checkedOut < totalCustomers){
         sem_init(&semCustomers, 0,1);
         sem_init(&semBaker,0,1);
@@ -86,16 +86,41 @@ void* buying(){
     }
 }
 
+void *gettingBread(void *customerId){
+    int id = *(int*)id;
+    struct timespec tim;
+    tim.tv_sec = 1;
+    tim.tv_nsec = 0; //for some reason, i also need nano seconds???
+
+
+}
+
 int main(){
     //to-do
     sem_init(&semCustomers, 0,1);
     sem_init(&semBaker, 0, 1);
     sem_init(&semStoreCapacity,0, totalCustomers);
 
-    fprintf(stderr, " ***   semaphores initialized    *** ");
+   // fprintf(stderr, " ***   semaphores initialized    *** ");
+    fprintf(stderr, "\n -- Busy Bakeshop starting --  \n");
+
+    // baking and cashing 
+    pthread_create(&bakerBakingThread, NULL, bakingBread, NULL); //function bakingBread executed by baker thread
+    fprintf(stderr, "Is this executing?");
+    pthread_create(&bakerCashingThread, NULL,buying, NULL);
+
+    // customer threads
+    for (int customerId = 1; customerId <= totalCustomers; customerId++){
+        customersAllowed++;
+        pthread_create(&customerThread[customerId], NULL, gettingBread, NULL );
+    }
 
 
+  //  fprintf(stderr, "customer thread done");
     pthread_exit(NULL); //main doesn't exit until all threads have exited
+    fprintf(stderr, "\n --Baking done. Clients served ---- \n");
+    exit(0);
+
 }
 
 
