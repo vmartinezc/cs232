@@ -51,8 +51,9 @@ int totalCustomers = 10;
 int loavesAvailable = 0;
 int checkoutLine[10];
 int loavesBaked = 0;
-int checkedOut = 0;
+int loavesCheckedOut = 0;
 int inStore = 0;
+int customersCheckedOut = 0;
 
 
 void *bakingBread(){
@@ -77,7 +78,27 @@ void *bakingBread(){
 }
 
 void *buying(){
-    while (checkedOut < totalCustomers){
+     struct timespec tim;
+
+    tim.tv_sec = 1;
+    tim.tv_nsec = 0; //for some reason, i also need nano seconds???
+
+    while (customersCheckedOut < totalCustomers){
+        if(loavesCheckedOut > customersCheckedOut){
+
+
+            fprintf(stderr, "Customer %d currently waiting to get checkout out \n", checkoutLine[customersCheckedOut]);
+            sem_wait(&semCustomers);
+            sem_wait(&semBaker);
+            fprintf(stderr, "Baker is at the cash register\n");
+            nanosleep(&tim,&tim);
+            customersCheckedOut++;
+
+            sem_post(&semCustomers);
+            sem_post(&semBaker);
+            fprintf(stderr, "I am the Baker and I'm going back to baking");
+            nanosleep(&tim, &tim);
+        }
 
     
         //checkout every customer in queue as long as there are still loaves available
@@ -89,12 +110,12 @@ void* gettingBread(void* customerId){
     struct timespec tim;
     tim.tv_sec = 1;
     tim.tv_nsec = 0; //for some reason, i also need nano seconds???
-    sem_wait(&semStoreCapacity);
 
+    sem_wait(&semStoreCapacity);
     sem_wait(&semCustomers);
-    customersAllowed++;
+    inStore++;
     fprintf(stderr,"Customer %d has entered the store.\n", customerId);
-    fprintf(stderr, "There are currently %d customers in the store.\n", customersAllowed);
+    fprintf(stderr, "There are currently %d customers in the store.\n", inStore);
     sem_post(&semCustomers);
 
 
@@ -115,9 +136,10 @@ void* gettingBread(void* customerId){
     }
 
     nanosleep(&tim,&tim);
-    customersAllowed--;
+    sem_wait(&semCustomers);
+    inStore--;
     fprintf(stderr, "Customer %d has left the store. \n", customerId);
-    sem_post(&semBaker);
+    sem_post(&semCustomers);
     sem_post(&semStoreCapacity);
 
 }
