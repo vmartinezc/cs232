@@ -86,11 +86,26 @@ void *buying(){
     }
 }
 
-void *gettingBread(void *customerId){
-    int id = *(int*)id;
+void *gettingBread(void* customerId){
+    
     struct timespec tim;
     tim.tv_sec = 1;
     tim.tv_nsec = 0; //for some reason, i also need nano seconds???
+    sem_wait(&semStoreCapacity);
+
+    sem_wait(&semCustomer);
+    customersAllowed++;
+    fprintf(stderr,"Customer %d has entered the store.", customerId);
+    fprintf(stderr, "There are currently %d customers in the store.", customersAllowed);
+    sem_post(&semCustomer);
+
+    
+    loavesAvailable --;
+    fprintf(stderr,"Customer %d has received their bread... \n", customerId);
+    
+
+
+
 
 
 }
