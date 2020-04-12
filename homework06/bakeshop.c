@@ -38,7 +38,7 @@
 //threads
 pthread_t bakerBakingThread;
 pthread_t bakerCashingThread;
-pthread_t customerThread[10] //max customers -> 10
+pthread_t customerThread[10]; //max customers -> 10
 
 //semaphores
 sem_t semBaker;
@@ -61,28 +61,35 @@ void* bakingBread(){
     //to-do
     while (loavesBaked < 10){
         tim.tv_sec = 1;
+        tim.tv_nsec = 0; //for some reason, i also need nano seconds???
         fprintf(stderr, "*** Baker: Here I am baking a loaf of bread *****\n");
         
         sem_wait(&semBaker);
         loavesBaked++;
         loavesAvailable++;
-        fprintf(stderr, "\n *** Baked loaves: %d\n Available loaves: %d\n", loavesBaked, loavesAvailable);
+        fprintf(stderr, "\n *** Baked loaves: %d\n *** Available loaves: %d\n", loavesBaked, loavesAvailable);
 
         sem_post(&semBaker);
-        nanosleep(&tim);
+        nanosleep(&tim, &tim);
     }
 
     fprintf(stderr, "Ten loaves baked!\n");
 }
 
 void* buying(){
-//to-do
-
+    while (checkedOut < totalCustomers){
+        sem_wait(&semCustomer);
+        sem_wait(&semBaker);
+    
+        //checkout every customer in queue as long as there are still loaves available
+    }
 }
-
 
 int main(){
     //to-do
+    sem_init(&semCustomers, 0,1);
+    sem_init(&semBaker, 0, 1);
+
 
     pthread_exit(NULL); //main doesn't exit until all threads have exited
 }
