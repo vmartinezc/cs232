@@ -78,8 +78,9 @@ void* bakingBread(){
 
 void* buying(){
     while (checkedOut < totalCustomers){
-        sem_wait(&semCustomer);
-        sem_wait(&semBaker);
+        sem_init(&semCustomer);
+        sem_init(&semBaker);
+        sem_init(&semStoreCapacity);
     
         //checkout every customer in queue as long as there are still loaves available
     }
