@@ -78,36 +78,51 @@ void *bakingBread(){
 
 void *buying(){
     while (checkedOut < totalCustomers){
-        sem_init(&semCustomers, 0,1);
-        sem_init(&semBaker,0,1);
-        sem_init(&semStoreCapacity,0, totalCustomers);
+
     
         //checkout every customer in queue as long as there are still loaves available
     }
 }
 
-void *gettingBread(void* customerId){
+void* gettingBread(void* customerId){
     
     struct timespec tim;
     tim.tv_sec = 1;
     tim.tv_nsec = 0; //for some reason, i also need nano seconds???
     sem_wait(&semStoreCapacity);
 
-    sem_wait(&semCustomer);
+    sem_wait(&semCustomers);
     customersAllowed++;
-    fprintf(stderr,"Customer %d has entered the store.", customerId);
-    fprintf(stderr, "There are currently %d customers in the store.", customersAllowed);
-    sem_post(&semCustomer);
+    fprintf(stderr,"Customer %d has entered the store.\n", customerId);
+    fprintf(stderr, "There are currently %d customers in the store.\n", customersAllowed);
+    sem_post(&semCustomers);
 
 
-    loavesAvailable --;
-    fprintf(stderr,"Customer %d has received their bread... \n", customerId);
+    while(1){
+        sem_wait(&semBaker);
+        nanosleep(&tim, &tim);
 
+        if (loavesAvailable > 0){
+             fprintf(stderr,"Customer %d has received their bread... \n", customerId);
+             loavesAvailable --;
+             nanosleep(&tim, &tim);
+             fprintf(stderr,"Customer %d has received their receipt... \n", customerId);
+             sem_post(&semBaker); //release the semaphore
+             break;
+        }
+        sem_post(&semBaker);
+
+    }
+
+    nanosleep(&tim,&tim);
+    customersAllowed--;
+    fprintf(stderr, "Customer %d has left the store. \n", customerId);
+    sem_post(&semBaker);
+    sem_post(&semStoreCapacity);
 
 }
 
 int main(){
-    //to-do
     sem_init(&semCustomers, 0,1);
     sem_init(&semBaker, 0, 1);
     sem_init(&semStoreCapacity,0, totalCustomers);
@@ -117,13 +132,12 @@ int main(){
 
     // baking and cashing 
     pthread_create(&bakerBakingThread, NULL, bakingBread, NULL); //function bakingBread executed by baker thread
-    fprintf(stderr, "Is this executing?");
     pthread_create(&bakerCashingThread, NULL,buying, NULL);
 
     // customer threads
     for (int customerId = 1; customerId <= totalCustomers; customerId++){
         customersAllowed++;
-        pthread_create(&customerThread[customerId], NULL, gettingBread, NULL );
+        pthread_create(&customerThread[customerId], NULL, gettingBread, (void*)customerId);
     }
 
 
