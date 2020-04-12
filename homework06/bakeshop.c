@@ -78,8 +78,8 @@ void* bakingBread(){
 
 void* buying(){
     while (checkedOut < totalCustomers){
-        sem_init(&semCustomer);
-        sem_init(&semBaker);
+        sem_init(&semCustomers, 0,1);
+        sem_init(&semBaker,0,1);
         sem_init(&semStoreCapacity,0, totalCustomers);
     
         //checkout every customer in queue as long as there are still loaves available
@@ -90,6 +90,9 @@ int main(){
     //to-do
     sem_init(&semCustomers, 0,1);
     sem_init(&semBaker, 0, 1);
+    sem_init(&semStoreCapacity,0, totalCustomers);
+
+    fprintf(stderr, " ***   semaphores initialized    *** ");
 
 
     pthread_exit(NULL); //main doesn't exit until all threads have exited
