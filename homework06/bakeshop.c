@@ -99,13 +99,9 @@ void *gettingBread(void* customerId){
     fprintf(stderr, "There are currently %d customers in the store.", customersAllowed);
     sem_post(&semCustomer);
 
-    
+
     loavesAvailable --;
     fprintf(stderr,"Customer %d has received their bread... \n", customerId);
-    
-
-
-
 
 
 }
