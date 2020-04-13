@@ -68,10 +68,12 @@ void *bakingBread(){
        
         
         sem_wait(&semBaker);
+        //critical section
         fprintf(stderr, "*** Baker: Here I am baking a loaf of bread *****\n");
         loavesBaked++;
         loavesAvailable++;
         fprintf(stderr, "\n *** Baked loaves: %d\n *** Available loaves: %d\n", loavesBaked, loavesAvailable);
+        //critical section
 
         sem_post(&semBaker);
         nanosleep(&tim, &tim);
@@ -94,23 +96,21 @@ void *buying(){
             sem_wait(&semCustomers);
             sem_wait(&semBaker);
 
-
+            //critical section
             fprintf(stderr, "Baker is at the cash register\n");
             fprintf(stderr, "Customer %d has paid\n", checkoutLine[customersCheckedOut]);
 
             nanosleep(&tim,&tim);
             fprintf(stderr, "Customer %d has paid\n", checkoutLine[customersCheckedOut]);
-           // fprintf(stderr,"Customer %d has received their bread... \n", customerId);
+        
             customersCheckedOut++;
+            //critical section
 
             sem_post(&semCustomers);
             sem_post(&semBaker);
             fprintf(stderr, "I am the Baker and I'm going back to baking\n");
             nanosleep(&tim, &tim);
         }
-
-    
-        //checkout every customer in queue as long as there are still loaves available
     }
 }
 
@@ -132,7 +132,7 @@ void* gettingBread(void* customerId){
         sem_wait(&semBaker);
         nanosleep(&tim, &tim);
         
-
+        //critical section
         while(loavesAvailable == 0){
             nanosleep(&tim, &tim);
         }
@@ -146,7 +146,8 @@ void* gettingBread(void* customerId){
              sem_post(&semCustomers); //release the semaphore
              break;
         }
-       // sem_post(&semBaker);
+        //critical section
+        sem_post(&semBaker);
 
     }
 
