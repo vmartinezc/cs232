@@ -1,0 +1,272 @@
+Script started on Sun Apr 12 23:12:16 2020
+[?1034hbash-3.2$ ./bakeshop
+
+ -- Busy Bakeshop starting --  
+*** Baker: Here I am baking a loaf of bread *****
+Customer 1 has entered the store.
+There are currently 3 customers in the store.
+Customer 4 has entered the store.
+Customer 3 has entered the store.
+Customer 6 has entered the store.
+There are currently 6 customers in the store.
+Customer 7 has entered the store.
+There are currently 7 customers in the store.
+Customer 2 has entered the store.
+There are currently 8 customers in the store.
+
+ *** Baked loaves: 1
+ *** Available loaves: 1
+Customer 10 has entered the store.
+Customer 5 has entered the store.
+Customer 8 has entered the store.
+There are currently 10 customers in the store.
+There are currently 4 customers in the store.
+There are currently 10 customers in the store.
+There are currently 10 customers in the store.
+There are currently 6 customers in the store.
+Customer 9 has entered the store.
+There are currently 10 customers in the store.
+Customer 1 has received their bread... 
+Customer 1 currently waiting to get checkout out 
+Baker is at the cash register
+Customer 1 has paid
+*** Baker: Here I am baking a loaf of bread *****
+
+ *** Baked loaves: 2
+ *** Available loaves: 1
+Customer 6 has received their bread... 
+Customer 1 has left the store. 
+Customer 1 has paid
+I am the Baker and I'm going back to baking
+*** Baker: Here I am baking a loaf of bread *****
+
+ *** Baked loaves: 3
+ *** Available loaves: 1
+Customer 8 has received their bread... 
+*** Baker: Here I am baking a loaf of bread *****
+
+ *** Baked loaves: 4
+ *** Available loaves: 1
+Customer 6 has left the store. 
+Customer 6 currently waiting to get checkout out 
+Baker is at the cash register
+Customer 6 has paid
+Customer 7 has received their bread... 
+Customer 8 has left the store. 
+Customer 6 has paid
+I am the Baker and I'm going back to baking
+*** Baker: Here I am baking a loaf of bread *****
+
+ *** Baked loaves: 5
+ *** Available loaves: 1
+Customer 4 has received their bread... 
+Customer 8 currently waiting to get checkout out 
+Baker is at the cash register
+Customer 8 has paid
+*** Baker: Here I am baking a loaf of bread *****
+
+ *** Baked loaves: 6
+ *** Available loaves: 1
+Customer 7 has left the store. 
+Customer 10 has received their bread... 
+Customer 4 has left the store. 
+*** Baker: Here I am baking a loaf of bread *****
+
+ *** Baked loaves: 7
+ *** Available loaves: 1
+Customer 8 has paid
+I am the Baker and I'm going back to baking
+Customer 5 has received their bread... 
+Customer 10 has left the store. 
+Customer 7 currently waiting to get checkout out 
+Baker is at the cash register
+Customer 7 has paid
+*** Baker: Here I am baking a loaf of bread *****
+
+ *** Baked loaves: 8
+ *** Available loaves: 1
+Customer 3 has received their bread... 
+Customer 5 has left the store. 
+Customer 7 has paid
+I am the Baker and I'm going back to baking
+*** Baker: Here I am baking a loaf of bread *****
+
+ *** Baked loaves: 9
+ *** Available loaves: 1
+Customer 9 has received their bread... 
+Customer 3 has left the store. 
+Customer 4 currently waiting to get checkout out 
+Baker is at the cash register
+Customer 4 has paid
+*** Baker: Here I am baking a loaf of bread *****
+
+ *** Baked loaves: 10
+ *** Available loaves: 1
+Customer 2 has received their bread... 
+Customer 9 has left the store. 
+Customer 4 has paid
+I am the Baker and I'm going back to baking
+Ten loaves baked!
+Customer 2 has left the store. 
+Customer 10 currently waiting to get checkout out 
+Baker is at the cash register
+Customer 10 has paid
+Customer 10 has paid
+I am the Baker and I'm going back to baking
+Customer 5 currently waiting to get checkout out 
+Baker is at the cash register
+Customer 5 has paid
+Customer 5 has paid
+I am the Baker and I'm going back to baking
+Customer 3 currently waiting to get checkout out 
+Baker is at the cash register
+Customer 3 has paid
+Customer 3 has paid
+I am the Baker and I'm going back to baking
+Customer 9 currently waiting to get checkout out 
+Baker is at the cash register
+Customer 9 has paid
+Customer 9 has paid
+I am the Baker and I'm going back to baking
+Customer 2 currently waiting to get checkout out 
+Baker is at the cash register
+Customer 2 has paid
+Customer 2 has paid
+I am the Baker and I'm going back to baking
+bash-3.2$ ./bakeshop
+
+ -- Busy Bakeshop starting --  
+*** Baker: Here I am baking a loaf of bread *****
+
+ *** Baked loaves: 1
+ *** Available loaves: 1
+Customer 1 has entered the store.
+There are currently 2 customers in the store.
+Customer 2 has entered the store.
+There are currently 4 customers in the store.
+Customer 3 has entered the store.
+There are currently 8 customers in the store.
+Customer 5 has entered the store.
+There are currently 9 customers in the store.
+Customer 6 has entered the store.
+Customer 7 has entered the store.
+There are currently 10 customers in the store.
+Customer 9 has entered the store.
+There are currently 10 customers in the store.
+Customer 10 has entered the store.
+There are currently 10 customers in the store.
+Customer 8 has entered the store.
+Customer 4 has entered the store.
+There are currently 10 customers in the store.
+There are currently 10 customers in the store.
+There are currently 10 customers in the store.
+Customer 1 has received their bread... 
+Customer 1 currently waiting to get checkout out 
+Baker is at the cash register
+Customer 1 has paid
+*** Baker: Here I am baking a loaf of bread *****
+
+ *** Baked loaves: 2
+ *** Available loaves: 1
+Customer 2 has received their bread... 
+Customer 1 has left the store. 
+*** Baker: Here I am baking a loaf of bread *****
+
+ *** Baked loaves: 3
+ *** Available loaves: 1
+Customer 1 has paid
+I am the Baker and I'm going back to baking
+Customer 3 has received their bread... 
+Customer 2 currently waiting to get checkout out 
+Baker is at the cash register
+*** Baker: Here I am baking a loaf of bread *****
+
+ *** Baked loaves: 4
+ *** Available loaves: 1
+Customer 2 has left the store. 
+Customer 2 has paid
+Customer 9 has received their bread... 
+*** Baker: Here I am baking a loaf of bread *****
+
+ *** Baked loaves: 5
+ *** Available loaves: 1
+Customer 2 has paid
+I am the Baker and I'm going back to baking
+Customer 3 has left the store. 
+Customer 6 has received their bread... 
+Customer 3 currently waiting to get checkout out 
+Baker is at the cash register
+Customer 3 has paid
+*** Baker: Here I am baking a loaf of bread *****
+
+ *** Baked loaves: 6
+ *** Available loaves: 1
+Customer 9 has left the store. 
+Customer 10 has received their bread... 
+Customer 4 has received their bread... 
+Customer 6 has left the store. 
+*** Baker: Here I am baking a loaf of bread *****
+
+ *** Baked loaves: 7
+ *** Available loaves: 1
+Customer 3 has paid
+I am the Baker and I'm going back to baking
+Customer 7 has received their bread... 
+Customer 10 has left the store. 
+Customer 4 has left the store. 
+Customer 9 currently waiting to get checkout out 
+Baker is at the cash register
+Customer 9 has paid
+*** Baker: Here I am baking a loaf of bread *****
+
+ *** Baked loaves: 8
+ *** Available loaves: 1
+Customer 5 has received their bread... 
+Customer 8 has received their bread... 
+Customer 7 has left the store. 
+Customer 9 has paid
+I am the Baker and I'm going back to baking
+*** Baker: Here I am baking a loaf of bread *****
+
+ *** Baked loaves: 9
+ *** Available loaves: 1
+Customer 8 has left the store. 
+Customer 5 has left the store. 
+Customer 6 currently waiting to get checkout out 
+Baker is at the cash register
+Customer 6 has paid
+*** Baker: Here I am baking a loaf of bread *****
+
+ *** Baked loaves: 10
+ *** Available loaves: 2
+Customer 6 has paid
+I am the Baker and I'm going back to baking
+Ten loaves baked!
+Customer 10 currently waiting to get checkout out 
+Baker is at the cash register
+Customer 10 has paid
+Customer 10 has paid
+I am the Baker and I'm going back to baking
+Customer 4 currently waiting to get checkout out 
+Baker is at the cash register
+Customer 4 has paid
+Customer 4 has paid
+I am the Baker and I'm going back to baking
+Customer 7 currently waiting to get checkout out 
+Baker is at the cash register
+Customer 7 has paid
+Customer 7 has paid
+I am the Baker and I'm going back to baking
+Customer 5 currently waiting to get checkout out 
+Baker is at the cash register
+Customer 5 has paid
+Customer 5 has paid
+I am the Baker and I'm going back to baking
+Customer 8 currently waiting to get checkout out 
+Baker is at the cash register
+Customer 8 has paid
+Customer 8 has paid
+I am the Baker and I'm going back to baking
+bash-3.2$ exit
+
+Script done on Sun Apr 12 23:13:26 2020

@@ -153,8 +153,13 @@ void* gettingBread(void* customerId){
 
     nanosleep(&tim,&tim);
     sem_wait(&semCustomers);
+
+    //critical section
     inStore--;
     fprintf(stderr, "Customer %d has left the store. \n", customerId);
+    //critical section
+
+
     sem_post(&semCustomers);
     sem_post(&semStoreCapacity);
     nanosleep(&tim,&tim);
@@ -166,7 +171,6 @@ int main(){
     sem_init(&semBaker, 0, 1);
     sem_init(&semStoreCapacity,0, customersAllowed);
 
-   // fprintf(stderr, " ***   semaphores initialized    *** ");
     fprintf(stderr, "\n -- Busy Bakeshop starting --  \n");
 
     // baking and cashing 
@@ -178,9 +182,7 @@ int main(){
        // inStore++;
         pthread_create(&customerThread[customerId], NULL, gettingBread, (void*)customerId);
     }
-
-
-  //  fprintf(stderr, "customer thread done");
+ 
     pthread_exit(NULL); //main doesn't exit until all threads have exited
     fprintf(stderr, "\n --Baking done. Clients served ---- \n");
     exit(0);
