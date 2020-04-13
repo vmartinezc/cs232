@@ -91,6 +91,8 @@ void *buying(){
             sem_wait(&semCustomers);
             sem_wait(&semBaker);
             fprintf(stderr, "Baker is at the cash register\n");
+            fprintf(stderr, "Customer %d has paid\n", checkoutLine[customersCheckedOut]);
+
             nanosleep(&tim,&tim);
             customersCheckedOut++;
 
