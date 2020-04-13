@@ -48,10 +48,12 @@ sem_t semStoreCapacity;
 //global vars
 int customersAllowed = 5;
 int totalCustomers = 10;
-int loavesAvailable = 0;
 int checkoutLine[10];
+
+int loavesAvailable = 0;
 int loavesBaked = 0;
 int loavesCheckedOut = 0;
+
 int inStore = 0;
 int customersCheckedOut = 0;
 
@@ -59,13 +61,14 @@ int customersCheckedOut = 0;
 void *bakingBread(){
 
     struct timespec tim;
-    //to-do
+
     while (loavesBaked < 10){
         tim.tv_sec = 1;
         tim.tv_nsec = 0; //for some reason, i also need nano seconds???
-        fprintf(stderr, "*** Baker: Here I am baking a loaf of bread *****\n");
+       
         
         sem_wait(&semBaker);
+        fprintf(stderr, "*** Baker: Here I am baking a loaf of bread *****\n");
         loavesBaked++;
         loavesAvailable++;
         fprintf(stderr, "\n *** Baked loaves: %d\n *** Available loaves: %d\n", loavesBaked, loavesAvailable);
@@ -90,10 +93,14 @@ void *buying(){
             fprintf(stderr, "Customer %d currently waiting to get checkout out \n", checkoutLine[customersCheckedOut]);
             sem_wait(&semCustomers);
             sem_wait(&semBaker);
+
+
             fprintf(stderr, "Baker is at the cash register\n");
             fprintf(stderr, "Customer %d has paid\n", checkoutLine[customersCheckedOut]);
 
             nanosleep(&tim,&tim);
+            fprintf(stderr, "Customer %d has paid\n", checkoutLine[customersCheckedOut]);
+           // fprintf(stderr,"Customer %d has received their bread... \n", customerId);
             customersCheckedOut++;
 
             sem_post(&semCustomers);
@@ -124,17 +131,22 @@ void* gettingBread(void* customerId){
     while(1){
         sem_wait(&semBaker);
         nanosleep(&tim, &tim);
+        
+
+        while(loavesAvailable == 0){
+            nanosleep(&tim, &tim);
+        }
 
         if (loavesAvailable > 0){
-             fprintf(stderr,"Customer %d has received their bread... \n", customerId);
              loavesAvailable --;
+             fprintf(stderr,"Customer %d has received their bread... \n", customerId);
              loavesCheckedOut++;
-             nanosleep(&tim, &tim);
-             fprintf(stderr,"Customer %d has received their receipt... \n", customerId);
-             sem_post(&semBaker); //release the semaphore
+             //nanosleep(&tim, &tim);
+             checkoutLine[loavesCheckedOut-1] = customerId;
+             sem_post(&semCustomers); //release the semaphore
              break;
         }
-        sem_post(&semBaker);
+       // sem_post(&semBaker);
 
     }
 
