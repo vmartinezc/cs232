@@ -147,7 +147,7 @@ void* gettingBread(void* customerId){
 int main(){
     sem_init(&semCustomers, 0,1);
     sem_init(&semBaker, 0, 1);
-    sem_init(&semStoreCapacity,0, totalCustomers);
+    sem_init(&semStoreCapacity,0, customersAllowed);
 
    // fprintf(stderr, " ***   semaphores initialized    *** ");
     fprintf(stderr, "\n -- Busy Bakeshop starting --  \n");
