@@ -96,7 +96,7 @@ void *buying(){
 
             sem_post(&semCustomers);
             sem_post(&semBaker);
-            fprintf(stderr, "I am the Baker and I'm going back to baking");
+            fprintf(stderr, "I am the Baker and I'm going back to baking\n");
             nanosleep(&tim, &tim);
         }
 
@@ -126,6 +126,7 @@ void* gettingBread(void* customerId){
         if (loavesAvailable > 0){
              fprintf(stderr,"Customer %d has received their bread... \n", customerId);
              loavesAvailable --;
+             loavesCheckedOut++;
              nanosleep(&tim, &tim);
              fprintf(stderr,"Customer %d has received their receipt... \n", customerId);
              sem_post(&semBaker); //release the semaphore
@@ -141,6 +142,7 @@ void* gettingBread(void* customerId){
     fprintf(stderr, "Customer %d has left the store. \n", customerId);
     sem_post(&semCustomers);
     sem_post(&semStoreCapacity);
+    nanosleep(&tim,&tim);
 
 }
 
@@ -158,7 +160,7 @@ int main(){
 
     // customer threads
     for (int customerId = 1; customerId <= totalCustomers; customerId++){
-        customersAllowed++;
+       // inStore++;
         pthread_create(&customerThread[customerId], NULL, gettingBread, (void*)customerId);
     }
 
