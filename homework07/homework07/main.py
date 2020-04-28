@@ -183,6 +183,7 @@ class Monitor:
                 if self._debug:
                     print("Created PCB for process {}".format(procname))
                 addr = startaddr
+                pcb.set_low_mem(addr)
                 for line in f:
                     line = line.strip()
                     if line == '':
@@ -195,6 +196,9 @@ class Monitor:
                         addr += 1
                     elif line.startswith("__main:"):
                         self._handle_main_label(addr, line, pcb)
+                    elif line.startswith("__data:"):
+                        self._handle_data_label(addr, line, pcb)
+    
                     else:   # the line is regular code: store it in ram
                         self._ram[addr] = line
                         addr += 1
@@ -225,19 +229,12 @@ class Monitor:
          if len(line.split()) != 2:
              raise ValueError("Illegal format: __main: must be followed by entrypoint address.")
          numBytes = int(line.split()[1])
-         highAddr = addr + numBytes
+         highAddr = addr + numBytes - 1
          pcb.set_high_mem(highAddr)
          if self._debug:
-            print("__main found at high address location", highAddr)
-        
-         
-         
-         
-         
-        
-         
-         
-
+            print("__data found at high address location", highAddr)
+    
+    
     def _write_program(self, startaddr, endaddr, tapename):
         '''Write memory from startaddr to endaddr to tape (a file).'''
         with open(tapename, "w") as f:

@@ -1,6 +1,5 @@
 # Multiply two numbers, found in locations 32 and 33, leaving the result in location 34.
 # Assumes this code is loaded at location 20.
-
 __main: 20
 mov 0 34
 mov *32 reg2
@@ -14,6 +13,5 @@ add reg0 reg2
 jmp 26
 mov reg2 34
 end
-
 __data: 3
 

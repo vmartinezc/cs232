@@ -21,12 +21,16 @@ class RAM:
 class MMU:
     def __init__(self, ram):
         self.ram = ram
+        self.reloc = 0
+        self.limit = 0
         
     def get_ram_value(self, addr):
         return self.ram.__getitem__(addr)
     
     def set_ram_value(self, addr, value):
         return self.ram.__setitem__(addr,value)
+    
+    
     
     
     
