@@ -229,7 +229,7 @@ class Monitor:
          if len(line.split()) != 2:
              raise ValueError("Illegal format: __main: must be followed by entrypoint address.")
          numBytes = int(line.split()[1])
-         highAddr = addr + numBytes - 1
+         highAddr = addr + numBytes
          pcb.set_high_mem(highAddr)
          if self._debug:
             print("__data found at high address location", highAddr)

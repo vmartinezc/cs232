@@ -30,6 +30,26 @@ class MMU:
     def set_ram_value(self, addr, value):
         return self.ram.__setitem__(addr,value)
     
+    def set_reloc_register(self,value):
+        self.reloc = value
+        
+    def set_limit_register(self, value):
+        self.limit = value
+    
+    def get_physical_addr(self, addr):
+        if addr >= self.limit:
+            raise ValueError("Bad address {}: The address is too high".format(addr))
+        return self.ram[addr + self.reloc]
+    
+    def set_physical_addr(self,addr,value):
+        if addr >= self.limit:
+            raise ValueError("Bad address {}: The address is too high".format(addr))
+        else:
+            self.ram[addr + self.reloc] = value
+            
+
+        
+    
     
     
     

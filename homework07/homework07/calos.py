@@ -55,6 +55,8 @@ class CalOS:
 
         # All ISRs do this: save registers of current process.
         self._current_proc[cpu.get_num()].set_registers(cpu.get_registers())
+        cpu.set_mmu_registers(self._current_proc[cpu.get_num()].get_low_mem(), self._current_proc[cpu.get_num()].get_high_mem())
+        
 
         if len(self._ready_q) == 0:
             # Leave current proc in place, as running: just reset the timer.
@@ -63,6 +65,8 @@ class CalOS:
             # Required of all ISRs: restore the registers before returning
             # (if no context switch)
             cpu.set_registers(self._current_proc[cpu.get_num()].get_registers())
+            cpu.set_mmu_registers(self._current_proc[cpu.get_num()].get_low_mem(), self._current_proc[cpu.get_num()].get_high_mem())
+            
             return
 
         self.context_switch(cpu)
@@ -102,7 +106,11 @@ class CalOS:
             print("Switching procs from {} to {}".format(old_proc.get_name(), new_proc.get_name()))
 
         old_proc.set_registers(cpu.get_registers())
+        cpu.set_mmu_registers(old_proc.get_low_mem(), old_proc.get_high_mem())
+        
         cpu.set_registers(new_proc.get_registers())
+        cpu.set_mmu_registers(new_proc.get_low_mem(), new_proc.get_high_mem())
+        
 
         self.add_to_ready_q(old_proc)
         new_proc.set_state(PCB.RUNNING)
@@ -167,6 +175,7 @@ class CalOS:
         self._current_proc[cpu.get_num()] = new_proc
         self.reset_timer(cpu)
         cpu.set_registers(new_proc.get_registers())
+        cpu.set_mmu_registers(new_proc.get_low_mem(), new_proc.get_high_mem())
         new_proc.set_state(PCB.RUNNING)
 
 class PCB:
