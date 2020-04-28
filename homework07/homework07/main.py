@@ -220,6 +220,23 @@ class Monitor:
         pcb.set_entry_point(logical_addr)
         if self._debug:
             print("__main found at physical location", addr, "but logical addr", logical_addr)
+     
+    def _handle_data_label(self, addr, line, pcb):
+         if len(line.split()) != 2:
+             raise ValueError("Illegal format: __main: must be followed by entrypoint address.")
+         numBytes = int(line.split()[1])
+         highAddr = addr + numBytes
+         pcb.set_high_mem(highAddr)
+         if self._debug:
+            print("__main found at high address location", highAddr)
+        
+         
+         
+         
+         
+        
+         
+         
 
     def _write_program(self, startaddr, endaddr, tapename):
         '''Write memory from startaddr to endaddr to tape (a file).'''
