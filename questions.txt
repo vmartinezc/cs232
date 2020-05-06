@@ -1,0 +1,14 @@
+Valeria Martinez Castro
+Questions
+
+Question # 1
+The program does not run the same way each time. This is so because the thread that gets to 
+its function first and grabs the semaphore is able to execute its function first and then the 
+semaphore is released for the other programs to get to the critical section.  
+
+Question # 2
+Giving the last costumer thread the highest priority does not ensure that the customer is 
+always given first priority. This is so because the customer still needs to wait for the semaphores
+to be released in order to be able to get to the critical section. So even though it would get to the 
+function first, that doesn't ensure first priority since it would still have to wait. 
+
