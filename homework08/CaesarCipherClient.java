@@ -14,6 +14,9 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.io.DataOutputStream;
+import java.io.PrintWriter;
+import java.net.UnknownHostException;
 
 public class CaesarCipherClient{
     public static void main(String[] args){
@@ -23,10 +26,10 @@ public class CaesarCipherClient{
         if(args.length!=2){
             System.out.println("Wrong number of arguments!");
             System.out.println("Usage: java CaesarCipherClient [arg1] [arg2]");
-            System.exit(1)
+            System.exit(1);
         }
         String host = args[0];
-        Integer port;
+        int port = 0;
 
         try{
             //check if second argument is a valid integer
@@ -41,7 +44,7 @@ public class CaesarCipherClient{
         System.out.println("Enter a rotation between 1 and 25 ");
 
         Scanner userInput = new Scanner(System.in);
-        Integer rotationInt = getInput.nextInt();
+        Integer rotationInt = userInput.nextInt();
 
 
         //Check if the integer is positive and less than 25
@@ -51,32 +54,48 @@ public class CaesarCipherClient{
             System.exit(1);
         }
 
-        try (
+        try(
             Socket CaesarServerSocket = new Socket(host, port);
+          
+            PrintWriter dataOut = new PrintWriter(CaesarServerSocket.getOutputStream(), true); 
+            BufferedReader in = new BufferedReader (new InputStreamReader(CaesarServerSocket.getInputStream()));
             BufferedReader stdIn = new BufferedReader(new InputStreamReader(System.in));
-            PrintWriter out = new PrintWriter(CaesarServerSocket.getOutputStream()); 
-            BufferedReader in = new BufferedReader (new InputStreamReader(CaesarServerSocket.getInputStrem()));
             
         )
         {
             System.out.println("Connected to" +host+ "on port" + port);
             System.out.println("Type quit to exit");
-            out.println.(String.valueOf(rotationInt));
+            dataOut.println(String.valueOf(rotationInt));
             System.out.println(in.readLine());
 
+            
+            System.out.print("Enter text to be encrypted: ");
+             String line;
 
-
-            while (true){
+            while ((line = stdIn.readLine()) != null && !line.equals("quit")){
+               
+                dataOut.println(line);
+                System.out.println("Server "+ in.readLine());
+                System.out.print("Enter text");
 
             }
+          //  System.out.println("quitting client");
 
+        }
 
+        catch(UnknownHostException e){
+            System.out.println("Error: " +host+ "unknown");
+            System.exit(1);
+        }
 
+        catch(IOException e){
+            System.err.println("IO Exception");
+            System.exit(1);
         }
     
 
 
 
     }
-}
 
+}
