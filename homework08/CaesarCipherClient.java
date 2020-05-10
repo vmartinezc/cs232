@@ -18,29 +18,6 @@ import java.io.OutputStream;
 public class CaesarCipherClient{
     public static void main(String[] args){
         System.out.print("Hello how r u");
-    }
-}
-
-/* Homework 8: Caesar Cipher Client
- * Valeria Martinez (vam6)
- * May 9, 2020
- *
- * Client gets the server's hostname and port via command-line arguments.
- */
-
-
-
-import java.util.Scanner;
-import java.net.Socket;
-import java.io.PrintWriter;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.IOException;
-import java.io.OutputStream;
-
-public class CaesarCipherClient{
-    public static void main(String[] args){
-        System.out.print("Hello how r u");
         
         //check if argument is valid
         if(args.length!=2){
@@ -76,12 +53,25 @@ public class CaesarCipherClient{
 
         try (
             Socket CaesarServerSocket = new Socket(host, port);
-            PrintWriter out = new PrintWriter(CaesarServerSocket.getOutputStream());
+            BufferedReader stdIn = new BufferedReader(new InputStreamReader(System.in));
+            PrintWriter out = new PrintWriter(CaesarServerSocket.getOutputStream()); 
             BufferedReader in = new BufferedReader (new InputStreamReader(CaesarServerSocket.getInputStrem()));
             
         )
         {
-            
+            System.out.println("Connected to" +host+ "on port" + port);
+            System.out.println("Type quit to exit");
+            out.println.(String.valueOf(rotationInt));
+            System.out.println(in.readLine());
+
+
+
+            while (true){
+
+            }
+
+
+
         }
     
 
