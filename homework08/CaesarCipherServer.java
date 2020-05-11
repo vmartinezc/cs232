@@ -5,6 +5,7 @@
  *
  * Client gets the server's hostname and port via command-line arguments.
  * Followed  tutorial & algorithm from JavaWorld (https://www.javaworld.com/article/2853780/socket-programming-for-scalable-systems.html)
+ * and tutorial from https://www.codejava.net/java-se/networking/java-socket-server-examples-tcp-ip
  *
  */
 
@@ -67,40 +68,74 @@ class MultiServerThread extends Thread {
     public void run(){
         try{
 
-        BufferedReader input = new BufferedReader(new InputStreamReader(msSocket.getInputStream()));
+        BufferedReader userInput = new BufferedReader(new InputStreamReader(msSocket.getInputStream()));
         PrintWriter dataOut = new PrintWriter(msSocket.getOutputStream(), true);
 
         String line;
-        line = input.readLine();
+        line = userInput.readLine();
         int rotationNumber = Integer.valueOf(line);
 
         if (rotationNumber < 1 || rotationNumber > 25){
             dataOut.print("Please enter a postive whole number less than 25.");
             msSocket.close();
 
-        System.out.println(new Date().toString() + " Disconnected. Invalid Rotation "+ msSocket.getRemoteSocketAddress().toString());
-
-
+        System.out.println(new Date().toString() + "Disconnected. Invalid Rotation: "+ msSocket.getRemoteSocketAddress().toString());
         } 
-       
-        
+        dataOut.println("Rotation: " + rotationNumber + " Encrypting...");
+        String lineRead = line.userInput.readLine();
+        while(lineRead != null  && !line.equals("quit")){
+            dataOut.println(encryptText(line, rotationNumber));
+        }
 
+        msSocket.close();
+        System.out.println(new Date().toString() + ": connected to"+ msSocket.getRemoteSocketAddress().toString() + " :Socket closed");
 
-
-
-
-    }catch (IOException e){
+    }catch (IOException ex){
+        System.err.println("IO Exception" + ex.getMessage());
+        System.exit(1);
 
 
             
         }
+}
 
 
+private static String encryptText(String line, int rotationNumber){
+    String encryptedText =""; //initialize to empty string
+    char character;
 
+    for(int i = 0; i < line.length(); i++){
+        //capitalized
+        if(character >= 'A' && character <= 'Z'){
+            character = (char)(character + rotationNumber);
 
+            if(character > 'Z'){ //loop around
+                character = (char)(character - 'Z' + 'A' - 1);
+            }
+            encryptedText+= character; 
+        }
 
+        //not capitalized
+        else if(character >= 'a' && character <= 'z'){
+            character = (char)(character + rotationNumber);
+            
+            if(character > 'Z'){ //loop around
+                character = (char)(character - 'Z' + 'A' - 1);
+
+            }
+            encryptedText += character; 
+
+    } 
+    else{
+        encryptedText += character;
+    }
+    }
+        return encryptedText;
+       
+    }
 
 }
-}
+       
+
         
       

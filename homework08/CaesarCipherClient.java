@@ -3,6 +3,8 @@
  * May 9, 2020
  *
  * Client gets the server's hostname and port via command-line arguments.
+ * Followed  tutorial & algorithm from JavaWorld (https://www.javaworld.com/article/2853780/socket-programming-for-scalable-systems.html)
+ * and tutorial from  https://www.codejava.net/java-se/networking/java-socket-server-examples-tcp-ip
  */
 
 
@@ -88,8 +90,8 @@ public class CaesarCipherClient{
             System.exit(1);
         }
 
-        catch(IOException e){
-            System.err.println("IO Exception");
+        catch(IOException ex){
+            System.err.println("IO Exception"+ ex.getMessage());
             System.exit(1);
         }
     
