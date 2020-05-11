@@ -24,7 +24,7 @@ public class CaesarCipherServer{
 
     public static void main(String[] args){
         if (args.length!=1){
-             System.out.println("Wrong number of arguments!");
+            System.out.println("Wrong number of arguments!");
             System.out.println("Usage: java CaesarCipherServer [port]");
             System.exit(1);
         }
@@ -38,12 +38,18 @@ public class CaesarCipherServer{
          )
          {
              System.out.println("Start server on port: " + port);
+             System.out.println("Connecting...");
 
              while(true){
+                 System.out.println("Connecting pt 2...");
                  Socket clientSocket = serverSocket.accept();
+
+                 System.out.println("Connecting pt 3...");
+
                  System.out.println(new Date().toString() + ": connected to"+ clientSocket.getRemoteSocketAddress().toString());
                  new MultiServerThread(clientSocket).start();
              }
+             //System.out.println("Testing" + port);
          }
 
              catch (IOException e ){
