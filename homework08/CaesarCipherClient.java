@@ -69,7 +69,7 @@ public class CaesarCipherClient{
             System.out.println(in.readLine());
 
             
-            System.out.print("Enter text to be encrypted: ");
+            System.out.print("Enter text: ");
              String line;
 
             while ((line = stdIn.readLine()) != null && !line.equals("quit")){
@@ -79,7 +79,7 @@ public class CaesarCipherClient{
                 System.out.print("Enter text");
 
             }
-          //  System.out.println("quitting client");
+    
 
         }
 
