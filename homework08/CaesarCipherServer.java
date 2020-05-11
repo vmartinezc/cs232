@@ -82,8 +82,10 @@ class MultiServerThread extends Thread {
         System.out.println(new Date().toString() + "Disconnected. Invalid Rotation: "+ msSocket.getRemoteSocketAddress().toString());
         } 
         dataOut.println("Rotation: " + rotationNumber + " Encrypting...");
-        String lineRead = line.userInput.readLine();
-        while(lineRead != null  && !line.equals("quit")){
+        String lineRead = userInput.readLine();
+
+        //check if input is not empty or == quit 
+        while(lineRead != null  && !lineRead.isEmpty() && !line.equals("quit")){
             dataOut.println(encryptText(line, rotationNumber));
         }
 
