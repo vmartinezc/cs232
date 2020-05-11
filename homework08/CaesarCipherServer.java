@@ -22,7 +22,7 @@ import java.text.SimpleDateFormat;
 
 public class CaesarCipherServer{
 
-    public static void mai(String[] args){
+    public static void main(String[] args){
         if (args.length!=1){
              System.out.println("Wrong number of arguments!");
             System.out.println("Usage: java CaesarCipherServer [port]");
@@ -104,7 +104,7 @@ class MultiServerThread extends Thread {
 
 private static String encryptText(String line, int rotationNumber){
     String encryptedText =""; //initialize to empty string
-    char character;
+    char character = '\0';
 
     for(int i = 0; i < line.length(); i++){
         //capitalized
