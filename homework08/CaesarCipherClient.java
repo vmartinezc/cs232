@@ -76,7 +76,7 @@ public class CaesarCipherClient{
                
                 dataOut.println(line);
                 System.out.println("Server "+ in.readLine());
-                System.out.print("Enter text: ");
+                System.out.print("Enter text to encrypt: ");
 
             }
     
