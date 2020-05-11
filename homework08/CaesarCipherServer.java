@@ -61,8 +61,8 @@ public class CaesarCipherServer{
 
     //code.java.net Java Server Multi thread Algorithm and tutorial
     public void run(){
-        BufferedReader input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-        PrintWriter dataOut = new PrintWriter(socket.getOutputStream(), true);
+        BufferedReader input = new BufferedReader(new InputStreamReader(msSocket.getInputStream()));
+        PrintWriter dataOut = new PrintWriter(msSocket.getOutputStream(), true);
 
             String line;
 
