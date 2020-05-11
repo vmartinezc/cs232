@@ -52,7 +52,11 @@ public class CaesarCipherServer{
         
     }
 
-    public class MultiServerThread extends Thread {
+
+
+}
+
+class MultiServerThread extends Thread {
     private Socket msSocket;
 
     public MultiServerThread(Socket msSocket){
@@ -64,18 +68,21 @@ public class CaesarCipherServer{
         BufferedReader input = new BufferedReader(new InputStreamReader(msSocket.getInputStream()));
         PrintWriter dataOut = new PrintWriter(msSocket.getOutputStream(), true);
 
-            String line;
+        String line;
+        line = input.readLine();
+        int rotationNumber = Integer.valueOf(line);
+
+        if (rotationNumber < 1 || rotationNumber > 25){
+            dataOut.print("Please enter a postive whole number less than 25.");
+            msSocket.close();
+
+        System.out.println(new Date().toString() + " Disconnected. Invalid Rotation "+ clientSocket.getRemoteSocketAddress().toString());
+
+        
+        }
 
 
     }
-
-
-
-
-
-
-}
-
 
 
 
