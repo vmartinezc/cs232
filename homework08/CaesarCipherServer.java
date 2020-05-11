@@ -65,6 +65,8 @@ class MultiServerThread extends Thread {
 
     //code.java.net Java Server Multi thread Algorithm and tutorial
     public void run(){
+        try{
+
         BufferedReader input = new BufferedReader(new InputStreamReader(msSocket.getInputStream()));
         PrintWriter dataOut = new PrintWriter(msSocket.getOutputStream(), true);
 
@@ -78,10 +80,13 @@ class MultiServerThread extends Thread {
 
         System.out.println(new Date().toString() + " Disconnected. Invalid Rotation "+ msSocket.getRemoteSocketAddress().toString());
 
-        
-        }
 
+        }
+       
         
+
+
+
 
 
     }
