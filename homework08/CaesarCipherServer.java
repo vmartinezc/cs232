@@ -81,11 +81,7 @@ class MultiServerThread extends Thread {
         System.out.println(new Date().toString() + " Disconnected. Invalid Rotation "+ msSocket.getRemoteSocketAddress().toString());
 
 
-        } catch (IOException e){
-
-
-            
-        }
+        } 
        
         
 
@@ -93,7 +89,11 @@ class MultiServerThread extends Thread {
 
 
 
-    }
+    }catch (IOException e){
+
+
+            
+        }
 
 
 
