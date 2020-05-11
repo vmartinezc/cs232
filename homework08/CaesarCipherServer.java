@@ -76,7 +76,7 @@ class MultiServerThread extends Thread {
             dataOut.print("Please enter a postive whole number less than 25.");
             msSocket.close();
 
-        System.out.println(new Date().toString() + " Disconnected. Invalid Rotation "+ clientSocket.getRemoteSocketAddress().toString());
+        System.out.println(new Date().toString() + " Disconnected. Invalid Rotation "+ msSocket.getRemoteSocketAddress().toString());
 
         
         }
