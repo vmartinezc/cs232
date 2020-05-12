@@ -41,12 +41,11 @@ public class CaesarCipherServer{
              System.out.println("Connecting...");
 
              while(true){
-                 System.out.println("Connecting pt 2...");
                  Socket clientSocket = serverSocket.accept();
 
+                 System.out.println(new Date().toString() + ": connected to "+ clientSocket.getRemoteSocketAddress().toString());
               //   System.out.println("Connecting pt 3...");
 
-                 System.out.println(new Date().toString() + ": connected to"+ clientSocket.getRemoteSocketAddress().toString());
                  new MultiServerThread(clientSocket).start();
              }
            
@@ -88,15 +87,15 @@ class MultiServerThread extends Thread {
         System.out.println(new Date().toString() + "Disconnected. Invalid Rotation: "+ msSocket.getRemoteSocketAddress().toString());
         } 
         dataOut.println("Rotation: " + rotationNumber + " Encrypting...");
-        String lineRead = userInput.readLine();
 
         //check if input is not empty or == quit 
-        while(lineRead != null  && !lineRead.isEmpty() && !line.equals("quit")){
+        while((line = userInput.readLine())  != null  && !line.isEmpty() && !line.equals("quit")){
+            System.out.print(line);
             dataOut.println(encryptText(line, rotationNumber));
         }
 
         msSocket.close();
-        System.out.println(new Date().toString() + ": connected to"+ msSocket.getRemoteSocketAddress().toString() + " :Socket closed");
+        System.out.println(new Date().toString() + ": connected to "+ msSocket.getRemoteSocketAddress().toString() + " :Socket closed");
 
     }catch (IOException ex){
         System.err.println("IO Exception" + ex.getMessage());
@@ -110,9 +109,10 @@ class MultiServerThread extends Thread {
 
 private static String encryptText(String line, int rotationNumber){
     String encryptedText =""; //initialize to empty string
-    char character = '\0';
+    char character;
 
     for(int i = 0; i < line.length(); i++){
+        character = line.charAt(i);
         //capitalized
         if(character >= 'A' && character <= 'Z'){
             character = (char)(character + rotationNumber);
@@ -127,18 +127,19 @@ private static String encryptText(String line, int rotationNumber){
         else if(character >= 'a' && character <= 'z'){
             character = (char)(character + rotationNumber);
             
-            if(character > 'Z'){ //loop around
-                character = (char)(character - 'Z' + 'A' - 1);
+            if(character > 'z'){ //loop around
+                character = (char)(character - 'z' + 'a' - 1);
 
             }
             encryptedText += character; 
 
-    } 
-    else{
-        encryptedText += character;
-    }
+            } 
+            else{
+                encryptedText += character;
+            }
     }
         return encryptedText;
+
        
     }
 
