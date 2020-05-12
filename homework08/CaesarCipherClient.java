@@ -22,7 +22,6 @@ import java.net.UnknownHostException;
 
 public class CaesarCipherClient{
     public static void main(String[] args){
-        System.out.print("Hello how r u");
         
         //check if argument is valid
         if(args.length!=2){
@@ -65,13 +64,13 @@ public class CaesarCipherClient{
             
         )
         {
-            System.out.println("Connected to " +host+ "on port " + port);
+            System.out.println("Connected to " +host+ " on port " + port);
             System.out.println("Type quit to exit");
             dataOut.println(String.valueOf(rotationInt));
             System.out.println(in.readLine());
 
             
-            System.out.print("Enter text: ");
+            System.out.print("Enter text to encrypt: ");
              String line;
 
             while ((line = stdIn.readLine()) != null && !line.equals("quit")){

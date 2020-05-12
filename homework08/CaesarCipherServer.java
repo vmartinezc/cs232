@@ -44,12 +44,12 @@ public class CaesarCipherServer{
                  System.out.println("Connecting pt 2...");
                  Socket clientSocket = serverSocket.accept();
 
-                 System.out.println("Connecting pt 3...");
+              //   System.out.println("Connecting pt 3...");
 
                  System.out.println(new Date().toString() + ": connected to"+ clientSocket.getRemoteSocketAddress().toString());
                  new MultiServerThread(clientSocket).start();
              }
-             //System.out.println("Testing" + port);
+           
          }
 
              catch (IOException e ){
